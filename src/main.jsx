@@ -1,11 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import "./theme/main.scss";
-import AppRouter from "./routes/AppRouter";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AppRouter from './routes/AppRouter';
+import theme from './theme/theme';
+import './theme/main.scss';
+import { ThemeProvider } from '@emotion/react';
 
 ReactDOM.render(
   <React.StrictMode>
-     <AppRouter />
+    <ThemeProvider theme={theme}>
+      <AppRouter />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
-)
+);

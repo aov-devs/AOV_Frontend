@@ -1,5 +1,6 @@
 @import './colors.scss';
 @import './settings.scss';
+@import './fonts.scss';
 
 // reset common styles
 * {
@@ -15,7 +16,7 @@ a {
 body,
 button,
 input {
-  font-family: iranyekan, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 // change scrollbar default styles
@@ -194,4 +195,9 @@ $color-highlight: lighten($c-gray-95, 7%);
 
 @function color($color-name) {
   @return var(--color-#{$color-name});
+}
+
+
+.mr5 {
+  margin-right: 5px;
 }

@@ -1,0 +1,17 @@
+@import 'src/theme/main.scss';
+.footer {
+  background-color: rgba(199, 230, 245, 0.992);
+  padding: 32px 16px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  
+  &__madeby {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: 600;
+  }
+}

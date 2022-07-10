@@ -1,0 +1,40 @@
+@import 'src/theme/main.scss';
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: $c-white;
+  box-shadow: 0 2px 8px $c-grey1a;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding: 16px;
+  }
+
+  &__logo {
+    font-size: xx-large;
+    font-family: 'Cookie', cursive;
+    font-family: 'Edu NSW ACT Foundation', cursive;
+    font-family: 'Edu SA Beginner', cursive;
+    color: $c-black;
+  }
+
+  &__right {
+    display: flex;
+  }
+
+  .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 4px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid \9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+  }
+}

@@ -1,0 +1,11 @@
+@import 'src/theme/main.scss';
+.layout {
+  background-color: $c-white7;
+
+  &__container {
+    min-height: calc(100vh - 164px);
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+}
