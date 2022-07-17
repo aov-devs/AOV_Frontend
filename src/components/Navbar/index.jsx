@@ -38,12 +38,12 @@ const Navbar = ({}) => {
             >
               <FaUserAlt className="mr5" />
               Guest
-              <span class="caret"></span>
+              <span className="caret"></span>
             </Button>
           </div>
         </div>
       </div>
-      <Menu id="auth" anchorEl={anchorEl} open={open} onClose={handleClose}>
+      <Menu  disableScrollLock id="auth" anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem component={Link} to="/login">
           <FaSignInAlt className="mr5" />
           Register
