@@ -23,6 +23,8 @@ input {
 html {
   --scrollbarBG: #f1f1f1;
   --thumbBG: #ccc;
+  position: relative;
+  min-height: 100%;
 }
 *::-webkit-scrollbar {
   width: 14px;

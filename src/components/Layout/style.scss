@@ -1,11 +1,13 @@
 @import 'src/theme/main.scss';
 .layout {
-  background-color: $c-white7;
+  background-color: $c-layout-bg;
 
   &__container {
     min-height: calc(100vh - 164px);
     width: 100%;
     max-width: 1200px;
     margin: auto;
+    padding-bottom: 150px;
+
   }
 }
