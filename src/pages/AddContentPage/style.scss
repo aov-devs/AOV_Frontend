@@ -1,0 +1,28 @@
+.add-content {
+  display: flex;
+    gap:20px;
+  justify-content: center;
+  background-color: white;
+  width: 600px;
+  @media (max-width: 400px) {
+    width: 95%;
+  }
+
+  .media-container {
+    margin: 20px 10px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 564px;
+      border-radius: 8px;
+      @media (max-width: 400px) {
+        width: 90%;
+      }
+    }
+  }
+
+  .annotations-container {
+    margin-top: 50px;
+    
+  }
+}

@@ -1,0 +1,53 @@
+.content-page {
+  display: flex;
+  justify-content: center;
+}
+
+.content-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  width: 600px;
+  @media (max-width: 400px) {
+    width: 95%;
+  }
+
+  .media-container {
+    margin: 20px 10px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 564px;
+      border-radius: 8px;
+      @media (max-width: 400px) {
+        width: 90%;
+      }
+    }
+    .image-overlay {
+        background: rgba(0, 0, 0, .4);
+        border-radius: 5px;
+        bottom: 4px;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        opacity: 0;
+        padding: 10px;
+        pointer-events: none;
+        position: absolute;
+        right: 4px;
+        transition: opacity 0.21s ease-in-out;
+        user-select: none;
+    }
+  }
+
+  .lang-tabs {
+    padding: 0px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .tab-panel-container {
+    padding: 10px 30px;
+    margin-bottom: 30px;
+  }
+  // background-color:yellow;
+}
