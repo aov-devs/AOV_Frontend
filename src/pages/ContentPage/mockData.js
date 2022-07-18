@@ -1,8 +1,4 @@
 export const mockAnnotations = {
-  canvas: {
-    w: 564,
-    h: 399,
-  },
   texts: [
     {
       x: 76.19,
@@ -34,4 +30,3 @@ export const mockAnnotations = {
     },
   ],
 };
-
