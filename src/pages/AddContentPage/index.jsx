@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import VaniImg from 'src/assets/demo/vaniiveRepo5.jpg'
 import Annotation from 'react-image-annotation'
 import Layout from 'src/components/Layout';
 import './style.scss';
@@ -44,19 +43,18 @@ const AddContentPage = () => {
           <div className="add-content">
             <div className="media-container">
               <Annotation
-                src={"https://pbs.twimg.com/media/FUzcgKmagAYworH?format=jpg&name=medium"}
-                alt='Two pebbles anthropomorphized holding hands'
+                src={VaniImg}
+                alt='Vaniive Repo ⑤'
                 annotations={imgAnno.annotations}
                 type={imgAnno?.type}
                 value={imgAnno.annotation}
                 onChange={handleAnnoChange}
                 onSubmit={handleAnnoSubmit}
-
+                allowTouch
               />
             </div>
 
             <div className="annotations-container">
-
               {
                 imgAnno.annotations.map((anno, i) =>
                   <div key={i}>
