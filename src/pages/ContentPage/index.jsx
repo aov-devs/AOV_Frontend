@@ -10,12 +10,10 @@ import VaniImg from 'src/assets/demo/vaniiveRepo5.jpg'
 import { InkPenIcon, HourglassIcon } from 'src/components/VanitasIcons';
 
 import './style.scss';
-import { useMediaQuery } from '@mui/material';
 // https://twitter.com/OneVnC/status/1534867819451629568
 // https://twitter.com/jun_mdesu/status/1534847373515849728
 
 const ContentPage = () => {
-  const isMobile = useMediaQuery('(max-width:600px)');
   const contentData = [
     {
       lang: 'Original',
@@ -45,7 +43,7 @@ const ContentPage = () => {
         return {
           geometry: {
             type: 'RECTANGLE',
-            x: d.x + (isMobile ? (d.x / 35) : 0),
+            x: d.x,
             y: d.y,
             width: d.w,
             height: d.h,
@@ -73,17 +71,19 @@ const ContentPage = () => {
         <div className="content-page">
           <div className="content-card">
             <div className="media-container">
-              <Annotation
-                onLoad={onImgLoad}
-                src={VaniImg}
-                alt='Vaniive Repo ⑤'
-                annotations={imgAnno.annotations}
-                type={imgAnno?.type}
-                value={imgAnno.annotation}
-                highlightColor='#7adcef'
-                disableAnnotation
-                disableOverlay
-              />
+              <div>
+                <Annotation
+                  onLoad={onImgLoad}
+                  src={VaniImg}
+                  alt='Vaniive Repo ⑤'
+                  annotations={imgAnno.annotations}
+                  type={imgAnno?.type}
+                  value={imgAnno.annotation}
+                  highlightColor='#7adcef'
+                  disableAnnotation
+                  disableOverlay
+                />
+              </div>
             </div>
 
 
@@ -97,7 +97,7 @@ const ContentPage = () => {
               <div hidden={tabVal !== 0}>
                 <div className="content-info">
                   <div className="title">
-                    <InkPenIcon/>
+                    <InkPenIcon />
                     Description:
                   </div>
                   <div className="description animated-border-quote">
@@ -158,7 +158,7 @@ const ContentPage = () => {
 
                 <div className="content-info credit">
                   <span className="role">
-                  Translated By:
+                    Translated By:
                   </span>
                   <div className="avatar">
                     <span>

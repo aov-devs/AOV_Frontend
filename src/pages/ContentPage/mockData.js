@@ -1,14 +1,14 @@
 export const mockAnnotations = {
   texts: [
     {
-      x: 76.19,
+      x: 78.19,
       y: 5.41,
       w: 17.19,
       h: 83.45,
       text: 'This is the tongue twister;「東京特許可局局長許可の 新設診療室写真撮影試写を示唆」.',
     },
     {
-      x: 60.09,
+      x: 62.09,
       y: 10.67,
       w: 6.2,
       h: 35.08,

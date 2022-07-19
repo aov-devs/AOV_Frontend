@@ -5,7 +5,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FaUserAlt, FaSignInAlt, FaPencilAlt } from 'react-icons/fa';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Logo from '../Logo';
 import './style.scss';
 
 const Navbar = ({}) => {
@@ -23,8 +22,7 @@ const Navbar = ({}) => {
       <div className="navbar">
         <div className="navbar__container">
           <Link to="/" className="navbar__logo">
-            <Logo/>
-            {/* The Archive of Vanitas */}
+            The Archive of Vanitas
           </Link>
           <div className="navbar__right">
             <Button
