@@ -27,12 +27,6 @@
         width: 100%;
       }
     }
-    .content-info {
-      margin: 10px 0;
-      .title {
-        font-size: larger;
-      }
-    }
   }
 
   .lang-tabs {
@@ -42,6 +36,115 @@
   .tab-panel-container {
     padding: 10px 30px;
     margin-bottom: 30px;
+    .content-info {
+      margin: 10px 0;
+      .title {
+        font-family: 'Cookie', cursive;
+        font-size: x-large;
+        color: #393968;
+        display: flex;
+        align-items: center;
+        padding-bottom: 5px;
+      }
+      .description {
+        padding-left: 30px;
+        .first-line {
+          padding-left: 20px;
+        }
+      }
+    }
+
+    .credit {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-right: 50px;
+      .role {
+        color: gray;
+      }
+      .avatar {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .MuiAvatar-root {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
   }
-  // background-color:yellow;
+}
+
+$bg: #fff;
+
+.animated-border-quote {
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 20px;
+
+  blockquote {
+    background-color: $bg;
+    border: solid 2px #7abaef;
+    display: inline-block;
+    margin: 0;
+    padding: 1em;
+    position: relative;
+    &:before {
+      animation: clockwise 30s infinite linear;
+      background-color: $bg;
+      bottom: 10%;
+      content: '';
+      left: 0;
+      opacity: 0.5;
+      position: absolute;
+      right: 0;
+      top: 10%;
+    }
+    &:after {
+      animation: counter 30s infinite linear;
+      background-color: $bg;
+      bottom: 10%;
+      content: '';
+      left: 0;
+      opacity: 0.5;
+      position: absolute;
+      right: 0;
+      top: 10%;
+    }
+    cite {
+      display: block;
+      font-style: italic;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        color: #393968;
+        &:hover {
+          color: #a3c9e7;
+        }
+      }
+    }
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
+@keyframes clockwise {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
 }
