@@ -3,9 +3,11 @@ import { BiMessageAdd, BiMessageX, BiEdit, BiCommentCheck } from 'react-icons/bi
 import Annotation from 'react-image-annotation'
 import NumericInput from 'react-numeric-input2';
 import TextField from '@mui/material/TextField';
-import Tooltip from '@mui/material/Tooltip';
+import { Tooltip, Pagination, Select, MenuItem } from '@mui/material';
 import VaniImg from 'src/assets/demo/loveismission1.jpg'
 import Layout from 'src/components/Layout';
+import { mockAnnotations } from './mockData'
+
 import './style.scss';
 // https://twitter.com/OneVnC/status/1534867819451629568
 // https://twitter.com/jun_mdesu/status/1534847373515849728
@@ -13,12 +15,39 @@ import './style.scss';
 
 
 
-const AddContentPage = () => {
+const AddContentPage = ({ clear = false }) => {
 
-  const [imgAnno, setImgAnno] = useState({
-    annotations: [],
-    annotation: {}
-  });
+
+  const createAnno = (data) => {
+    return {
+      annotation: {},
+      annotations: data.map(d => {
+        return {
+          geometry: {
+            type: 'RECTANGLE',
+            x: d.x,
+            y: d.y,
+            width: d.w,
+            height: d.h,
+          },
+          data: {
+            text: d.text,
+            id: Math.random(),
+          },
+        }
+      }
+
+      )
+    }
+  };
+
+
+
+  const [imgAnno, setImgAnno] = useState(clear ?
+    {
+      annotation: {},
+      annotations: [],
+    } : createAnno(mockAnnotations));
 
 
   const deleteAnno = (index) => {
@@ -49,7 +78,7 @@ const AddContentPage = () => {
           onChange={(v) => handleGeoChange(idx, field, v)}
           min={0}
           max={100}
-          step={1}
+          step={0.5}
           precision={2}
           size={5}
           title={field}
@@ -63,6 +92,8 @@ const AddContentPage = () => {
   const handleAnnoChange = (annotation) => {
     setImgAnno({ ...imgAnno, annotation })
   }
+
+
 
   const handleAnnoSubmit = (annotation) => {
     const { geometry, data } = annotation
@@ -101,7 +132,6 @@ const AddContentPage = () => {
     console.log(anno)
   }
 
-  useEffect(() => { saveAnno(); }, [imgAnno.annotations])
 
   function renderEditor(props) {
     const { geometry } = props.annotation
@@ -213,6 +243,28 @@ const AddContentPage = () => {
         </div>
       </div >)
   };
+  const [rowsPerPage, setRowsPerPage] = React.useState(1);
+  const [page, setPage] = React.useState(1);
+  const [pageN, setPageN] = React.useState(Math.ceil(imgAnno.annotations.length / rowsPerPage));
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
+  useEffect(() => {
+    saveAnno();
+    setPageN(Math.ceil(imgAnno.annotations.length / rowsPerPage));
+  }, [imgAnno, rowsPerPage, deleteAnno])
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+  };
+  const pageRows = {
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+  };
   return (
     <div>
       <Layout title="Add New Content">
@@ -236,14 +288,35 @@ const AddContentPage = () => {
             </div>
 
             <div className="annotations-container">
-              {
-                imgAnno.annotations.map((anno, i) => <AnnotationText key={i} annotation={anno} index={i} />)
-              }
+              <div className="pagination-container">
+                <Pagination siblingCount={0} count={pageN} page={page} onChange={handlePageChange} color="primary" />
+              </div>
+              <div>
+                {
+                  imgAnno.annotations.slice((page - 1) * rowsPerPage, page * rowsPerPage).map((anno, i) => <AnnotationText key={(page - 1) * rowsPerPage + i} annotation={anno} index={(page - 1) * rowsPerPage + i} />)
+                }
+              </div>
+
+              <div className="boxes-per-page">
+                <label>
+                  Boxes per page:
+                </label>
+                <Select
+                  value={rowsPerPage}
+                  onChange={handleChangeRowsPerPage}
+                >
+                  {Object.entries(pageRows).map(([val, label], i) => (
+                    <MenuItem value={val} key={i}>
+                      {label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
             </div>
           </div>
         </div>
-      </Layout>
-    </div>)
+      </Layout >
+    </div >)
 };
 
 export default AddContentPage;

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: white;
   width: 600px;
   @media (max-width: 400px) {
@@ -20,23 +21,36 @@
       }
     }
   }
-
+  
   .annotations-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 0px;
+    margin-bottom: 30px;
+    width: 500px;
+    @media (max-width: 500px) {
+      width: 90%;
+    }
+    .pagination-container{
+ 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .boxes-per-page{
+      margin-right: auto;
+      label{
+        margin: 10px;
+      }
+      .MuiSelect-select{
+        padding: 4px 8px;
+        padding-right: 32px;
+      }
+    }
+
     .annotation {
       border: 1px solid gray;
       border-radius: 5px;
       border-top: 3px solid  hsl(212, 86%, 64%);
-      
       margin: 10px;
-      width: 500px;
-      @media (max-width: 500px) {
-        width: 90%;
-      }
+
       .anno-text {
         // background-color: #CBE2F3;
         width: 100%;
@@ -72,12 +86,17 @@
         }
       }
       .anno-pos {
-        box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
 
-        // background-color: #2566A5;
         .geo-num {
           max-width: 80px;
           margin: 5px 15px;
+
+          @media (max-width: 500px) {
+            margin: 5px 30px;
+
+          }
+
+
           label{
             color: hsl(230, 25%, 40%);
           }
@@ -136,6 +155,7 @@
 }
 
 .annotation-editor-container {
+  z-index: 1000;
   background: white;
   border-radius: 2px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
