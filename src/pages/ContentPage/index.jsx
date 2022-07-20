@@ -17,10 +17,7 @@ const ContentPage = () => {
   const contentData = [
     {
       lang: 'Original',
-      anno: {
-        canvas: {},
-        texts: []
-      }
+      anno: []
     },
     {
       lang: 'English',
@@ -39,7 +36,7 @@ const ContentPage = () => {
   const createAnno = (data) => {
     return {
       annotation: {},
-      annotations: data.texts.map(d => {
+      annotations: data.map(d => {
         return {
           geometry: {
             type: 'RECTANGLE',

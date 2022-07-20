@@ -28,22 +28,65 @@
     align-items: center;
     margin: 30px 0px;
     .annotation {
-      margin: 5px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      border-top: 3px solid  hsl(212, 86%, 64%);
+      
+      margin: 10px;
       width: 500px;
-      border: 1px solid #363636;
+      @media (max-width: 500px) {
+        width: 90%;
+      }
       .anno-text {
+        // background-color: #CBE2F3;
         width: 100%;
-        padding: 12px 16px;
         border-bottom: 1px solid gray;
+        display: flex;
+        align-items: center;
+        .index {
+          padding: 0px 10px;
+        }
+        .input {
+          flex-grow: 1;
+          padding-right: 10px;
+        }
+        .editIcon {
+          padding-right: 10px;
+
+          margin-left: auto;
+          font-size: 28px;
+          &:hover {
+            color: hsl(212, 86%, 64%);
+            cursor: pointer;
+          }
+        }
+        .deleteIcon {
+          padding-right: 10px;
+          margin-left: auto;
+          font-size: 28px;
+
+          &:hover {
+            color: red;
+            cursor: pointer;
+          }
+        }
       }
       .anno-pos {
-        .MuiTextField-root{
+        box-shadow: 0px 30px 40px -20px hsl(229, 6%, 66%);
+
+        // background-color: #2566A5;
+        .geo-num {
           max-width: 80px;
-          margin: 5px;
-          // flex-grow: 1;
+          margin: 5px 15px;
+          label{
+            color: hsl(230, 25%, 40%);
+          }
         }
-        padding: 12px 8px;
+        .groupfield {
+          display: flex;
+        }
         display: flex;
+
         @media (max-width: 600px) {
           flex-direction: column;
         }

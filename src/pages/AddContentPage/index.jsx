@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
-import { BiMessageAdd } from 'react-icons/bi';
+import React, { useState, useEffect } from 'react';
+import { BiMessageAdd, BiMessageX, BiEdit, BiCommentCheck } from 'react-icons/bi';
 import Annotation from 'react-image-annotation'
+import NumericInput from 'react-numeric-input2';
 import TextField from '@mui/material/TextField';
-import VaniImg from 'src/assets/demo/vaniiveRepo5.jpg'
+import Tooltip from '@mui/material/Tooltip';
+import VaniImg from 'src/assets/demo/loveismission1.jpg'
 import Layout from 'src/components/Layout';
 import './style.scss';
 // https://twitter.com/OneVnC/status/1534867819451629568
 // https://twitter.com/jun_mdesu/status/1534847373515849728
 
-const AddContentPage = () => {
 
+
+
+const AddContentPage = () => {
 
   const [imgAnno, setImgAnno] = useState({
     annotations: [],
     annotation: {}
   });
+
+
+  const deleteAnno = (index) => {
+    const newAnno = imgAnno.annotations;
+    newAnno.splice(index, 1);
+    setImgAnno({
+      annotation: imgAnno.annotation,
+      annotations: newAnno
+    })
+  }
 
   const handleGeoChange = (i, field, newValue) => {
     const newAnno = imgAnno.annotations;
@@ -23,10 +37,29 @@ const AddContentPage = () => {
       annotation: imgAnno.annotation,
       annotations: newAnno
     })
-
-
   }
 
+  const GeoNum = ({ annotation, idx, field }) => {
+    return (
+      <div className="geo-num">
+        <label>{field}</label>
+        <NumericInput
+          name={field}
+          value={annotation.geometry[field]}
+          onChange={(v) => handleGeoChange(idx, field, v)}
+          min={0}
+          max={100}
+          step={1}
+          precision={2}
+          size={5}
+          title={field}
+          mobile={false}
+          strict
+        />
+      </div>
+
+    )
+  }
   const handleAnnoChange = (annotation) => {
     setImgAnno({ ...imgAnno, annotation })
   }
@@ -41,7 +74,7 @@ const AddContentPage = () => {
     const roundBoundaries = (geo) => {
       return { type: geo.type, x: r2(geo.x), y: r2(geo.y), width: r2(geo.width), height: r2(geo.height) }
     }
-    console.log("annotations", imgAnno)
+    // console.log("annotations", imgAnno)
     setImgAnno({
       annotation: {},
       annotations: [...imgAnno.annotations, {
@@ -53,6 +86,22 @@ const AddContentPage = () => {
       }]
     })
   }
+
+
+  const saveAnno = () => {
+    const anno = imgAnno.annotations.map(anno => {
+      const { x, y, width, height } = anno.geometry;
+      return ({
+        x, y,
+        w: width,
+        h: height,
+        text: anno.data.text,
+      })
+    })
+    console.log(anno)
+  }
+
+  useEffect(() => { saveAnno(); }, [imgAnno.annotations])
 
   function renderEditor(props) {
     const { geometry } = props.annotation
@@ -96,6 +145,74 @@ const AddContentPage = () => {
       </div>
     )
   }
+  const handleAnnoTextChange = (i, newValue) => {
+    const newAnno = imgAnno.annotations;
+    newAnno[i].data.text = newValue
+    setImgAnno({
+      annotation: imgAnno.annotation,
+      annotations: newAnno
+    })
+  }
+
+  const AnnotationText = ({ annotation, index }) => {
+
+    const [editMode, setEditMode] = useState(false);
+    const [translation, setTranslation] = useState(annotation.data.text);
+
+    return (
+      <div className='annotation'>
+        <div className='anno-text' >
+          <span className="index">
+            #{index + 1}
+          </span>
+          <span className="input">
+            <TextField
+              multiline
+              fullWidth
+              value={translation}
+              disabled={!editMode}
+              onChange={(e) => setTranslation(e.target.value)}
+            />
+          </span>
+
+          {!editMode &&
+            <Tooltip title="Edit">
+              <span className="editIcon" onClick={() => setEditMode(true)} >
+                <BiEdit />
+              </span>
+            </Tooltip>
+          }
+
+          {editMode &&
+            <Tooltip title="Save Changes">
+              <span className="editIcon" onClick={() => {
+                handleAnnoTextChange(index, translation);
+                setEditMode(false);
+
+              }} >
+                <BiCommentCheck />
+              </span>
+            </Tooltip>
+          }
+
+          <Tooltip title="Delete">
+            <span className="deleteIcon" onClick={() => deleteAnno(index)}>
+              <BiMessageX />
+            </span>
+          </Tooltip>
+        </div>
+        <div className='anno-pos' >
+          <div className='groupfield'>
+            <GeoNum annotation={annotation} idx={index} field='x' />
+            <GeoNum annotation={annotation} idx={index} field='y' />
+          </div>
+          <div className='groupfield'>
+            <GeoNum annotation={annotation} idx={index} field='width' />
+            <GeoNum annotation={annotation} idx={index} field='height' />
+          </div>
+        </div>
+      </div >)
+  };
   return (
     <div>
       <Layout title="Add New Content">
@@ -112,6 +229,7 @@ const AddContentPage = () => {
                   onChange={handleAnnoChange}
                   onSubmit={handleAnnoSubmit}
                   renderEditor={renderEditor}
+                  highlightColor='#7adcef'
                   allowTouch
                 />
               </div>
@@ -119,41 +237,7 @@ const AddContentPage = () => {
 
             <div className="annotations-container">
               {
-                imgAnno.annotations.map((anno, i) =>
-                  <div className='annotation' key={i}>
-                    <div className='anno-text' >
-                      {anno.data.text}
-                    </div>
-                    <div className='anno-pos' >
-                      <div>
-                        <TextField
-                          label="x"
-                          onChange={(e) => handleGeoChange(i, 'x', e.target.value)}
-                          value={anno.geometry.x}
-                          type="number"
-                        />
-                        <TextField
-                          onChange={(e) => handleGeoChange(i, 'y', e.target.value)}
-                          value={anno.geometry.y}
-                          label="y"
-                          type="number"
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          label="w"
-                          type="number"
-                        />
-                        <TextField
-                          label="h"
-                          type="number"
-                        />
-                        {/* w: {anno.geometry.width}
-                        h:{anno.geometry.height} */}
-                      </div>
-                    </div>
-                  </div>
-                )
+                imgAnno.annotations.map((anno, i) => <AnnotationText key={i} annotation={anno} index={i} />)
               }
             </div>
           </div>
