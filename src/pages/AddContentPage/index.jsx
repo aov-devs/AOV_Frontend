@@ -3,7 +3,7 @@ import { BiMessageAdd, BiMessageX, BiEdit, BiCommentCheck } from 'react-icons/bi
 import Annotation from 'react-image-annotation'
 import NumericInput from 'react-numeric-input2';
 import TextField from '@mui/material/TextField';
-import { Tooltip, Pagination, Select, MenuItem } from '@mui/material';
+import { Tooltip, Pagination, Select, MenuItem, useMediaQuery } from '@mui/material';
 import VaniImg from 'src/assets/demo/loveismission1.jpg'
 import Layout from 'src/components/Layout';
 import { mockAnnotations } from './mockData'
@@ -17,7 +17,7 @@ import './style.scss';
 
 const AddContentPage = ({ clear = false }) => {
 
-
+  const isMobile = useMediaQuery('(max-width:600px)')
   const createAnno = (data) => {
     return {
       annotation: {},
@@ -68,6 +68,15 @@ const AddContentPage = ({ clear = false }) => {
     })
   }
 
+  const handleMouseEnter = (i, isEnter) => {
+    const newAnno = imgAnno.annotations;
+    newAnno[i].isActive = isEnter;
+    setImgAnno({
+      annotation: imgAnno.annotation,
+      annotations: newAnno
+    })
+  }
+
   const GeoNum = ({ annotation, idx, field }) => {
     return (
       <div className="geo-num">
@@ -105,7 +114,6 @@ const AddContentPage = ({ clear = false }) => {
     const roundBoundaries = (geo) => {
       return { type: geo.type, x: r2(geo.x), y: r2(geo.y), width: r2(geo.width), height: r2(geo.height) }
     }
-    // console.log("annotations", imgAnno)
     setImgAnno({
       annotation: {},
       annotations: [...imgAnno.annotations, {
@@ -184,13 +192,16 @@ const AddContentPage = ({ clear = false }) => {
     })
   }
 
-  const AnnotationText = ({ annotation, index }) => {
+  const AnnotationEditBox = ({ annotation, index, handleMouseEnter }) => {
 
     const [editMode, setEditMode] = useState(false);
     const [translation, setTranslation] = useState(annotation.data.text);
 
     return (
-      <div className='annotation'>
+      <div className='annotation'
+        onMouseEnter={e => handleMouseEnter(index, true)}
+        onMouseLeave={e => handleMouseEnter(index, false)}
+      >
         <div className='anno-text' >
           <span className="index">
             #{index + 1}
@@ -253,7 +264,7 @@ const AddContentPage = ({ clear = false }) => {
   useEffect(() => {
     saveAnno();
     setPageN(Math.ceil(imgAnno.annotations.length / rowsPerPage));
-  }, [imgAnno, rowsPerPage, deleteAnno])
+  }, [imgAnno.annotations, rowsPerPage])
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -271,7 +282,7 @@ const AddContentPage = ({ clear = false }) => {
         <div className="content-page">
           <div className="add-content">
             <div className="media-container">
-              <div>
+              <div style={{zIndex:1}}>
                 <Annotation
                   src={VaniImg}
                   alt='Vaniive Repo ⑤'
@@ -289,11 +300,18 @@ const AddContentPage = ({ clear = false }) => {
 
             <div className="annotations-container">
               <div className="pagination-container">
-                <Pagination siblingCount={0} count={pageN} page={page} onChange={handlePageChange} color="primary" />
+                <Pagination siblingCount={isMobile ? 0 : 2} count={pageN} page={page} onChange={handlePageChange} color="primary" />
               </div>
               <div>
                 {
-                  imgAnno.annotations.slice((page - 1) * rowsPerPage, page * rowsPerPage).map((anno, i) => <AnnotationText key={(page - 1) * rowsPerPage + i} annotation={anno} index={(page - 1) * rowsPerPage + i} />)
+                  imgAnno.annotations.slice((page - 1) * rowsPerPage, page * rowsPerPage).map((anno, i) =>
+
+                    <AnnotationEditBox
+                      key={(page - 1) * rowsPerPage + i}
+                      annotation={anno}
+                      index={(page - 1) * rowsPerPage + i}
+                      handleMouseEnter={handleMouseEnter}
+                    />)
                 }
               </div>
 

@@ -21,6 +21,13 @@
       }
     }
   }
+  .pagination-container{
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   
   .annotations-container {
     margin-bottom: 30px;
@@ -28,12 +35,7 @@
     @media (max-width: 500px) {
       width: 90%;
     }
-    .pagination-container{
- 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+
     .boxes-per-page{
       margin-right: auto;
       label{
