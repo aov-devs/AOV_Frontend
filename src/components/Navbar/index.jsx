@@ -43,11 +43,11 @@ const Navbar = ({}) => {
         </div>
       </div>
       <Menu  disableScrollLock id="auth" anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem component={Link} to="/login">
+        <MenuItem component={Link} to="/register">
           <FaSignInAlt className="mr5" />
           Register
         </MenuItem>
-        <MenuItem component={Link} to="/register">
+        <MenuItem component={Link} to="/login">
           <FaPencilAlt className="mr5" />
           Login
         </MenuItem>
