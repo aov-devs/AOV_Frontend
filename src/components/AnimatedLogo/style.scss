@@ -45,6 +45,14 @@ $t-d: 0.8s;
     font-size: 48px;
     font-family: 'Edu SA Beginner', cursive;
     padding: 0px 30px;
+
+    @media (max-width: 550px) {
+      font-size: calc(30px + 1vw);
+    }
+
+    @media (min-width: 550px) and (max-width: 650px ) {
+      font-size: calc(34px + 1vw);
+    }
   }
 }
 
