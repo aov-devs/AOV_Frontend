@@ -1,0 +1,67 @@
+$t-d: 0.8s;
+
+@mixin animated_name {
+  list-style: none;
+
+  li {
+    display: inline-block;
+    color: black;
+    opacity: 1;
+    transition: all $t-d ease-in-out $t-d;
+    max-width: 2em;
+    &.spaced {
+      padding-left: 0.25em;
+    }
+  }
+  &.hidden {
+    li {
+      &.spaced {
+        padding-left: 0;
+      }
+      &.ghost {
+        opacity: 0;
+        max-width: 0;
+      }
+      &.capital {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+.animated-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  .logo-image {
+    padding-left: 50px;
+    img {
+      height: 150px;
+    }
+  }
+  .app-name {
+    @include animated_name;
+    font-size: 48px;
+    font-family: 'Edu SA Beginner', cursive;
+    padding: 0px 30px;
+  }
+}
+
+.aov-logo {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  .logo-image {
+    margin-right: 10px;
+    -webkit-transition: all $t-d ease-in;
+    -moz-transition: all $t-d ease-in;
+    -o-transition: all $t-d ease-in;
+    transition: all $t-d ease-in;
+    &.ghost {
+      opacity: 0;
+      max-width: 0;
+    }
+  }
+  @include animated_name;
+}

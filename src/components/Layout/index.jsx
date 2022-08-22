@@ -4,9 +4,9 @@ import Navbar from '../Navbar';
 import Footer from '../Footer';
 import './style.scss';
 
-const Layout = ({ title = 'AOV', children }) => {
+const Layout = ({ title = 'AOV', styles = {}, children }) => {
   return (
-    <div className="layout">
+    <div className="layout" style={styles}>
       <Helmet>
         <title>{title} | The Archive of Vanitas</title>
       </Helmet>
