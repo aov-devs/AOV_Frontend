@@ -3,11 +3,12 @@
   background-color: $c-layout-bg;
 
   &__container {
-    min-height: calc(100vh - 164px);
+    position: relative;
+    min-height: calc(100vh - 160px);
     width: 100%;
     max-width: 1200px;
     margin: auto;
     padding-bottom: 150px;
-
+    padding-top: 40px;
   }
 }

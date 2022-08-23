@@ -17,6 +17,7 @@ $login-btn-color: rgb(41, 9, 129);
   height: calc($baseline * 42.6);
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
   margin: auto;
+  margin-top: 40px;
   @media (max-width: 500px) {
     $scale: 0.5;
     width: calc($baseline * 60);

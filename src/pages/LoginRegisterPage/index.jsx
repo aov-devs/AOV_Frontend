@@ -1,44 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { LoginForm,RegisterForm } from 'src/components/Forms';
+import { Space } from 'react-zoomable-ui';
+import { LoginForm, RegisterForm } from 'src/components/Forms';
 import Layout from 'src/components/Layout';
-import { useLogin } from 'src/api/auth';
 import BeastImg from 'src/assets/beast.jpg';
 import './style.scss';
 import { useLocation } from 'react-router-dom';
-
 const LoginRegisterPage = () => {
   const location = useLocation();
   const [bookPage, setBookPage] = useState('');
-  const login = useLogin();
   useEffect(() => {
     if (location.pathname == '/register') setBookPage('next-page');
     else if (location.pathname == '/login') setBookPage('');
   }, [location]);
-
   return (
     <Layout title={location.pathname.substr(1)}>
-      <div className="book-container">
-        <div className="book">
-          <label htmlFor="page-1" className="book__page">
-            <DidYouKnowBox />
-          </label>
+        <Space
+          onCreate={(viewPort) => {
+            viewPort.setBounds({
+              x: [0, window.innerWidth],
+              y: [0, window.innerHeight],
+            });
+          }}
+        >
+          <div className="book-container">
+            <div className="book">
+              <label htmlFor="page-1" className="book__page">
+                <DidYouKnowBox />
+              </label>
 
-          <label htmlFor="page-2" className="book__page book__page--4">
-            <div className="page__content"><RegisterForm/></div>
-          </label>
+              <label htmlFor="page-2" className="book__page book__page--4">
+                <div className="page__content">
+                  <RegisterForm />
+                </div>
+              </label>
 
-          <div className={`book__page book__page--2 ${bookPage}`}>
-            <div className="book__page-front">
-              <div className="page__content">
-                <LoginForm />
+              <div className={`book__page book__page--2 ${bookPage}`}>
+                <div className="book__page-front">
+                  <div className="page__content">
+                    <LoginForm />
+                  </div>
+                </div>
+                <div className="book__page-back">
+                  <div className="page__content">page 3</div>
+                </div>
               </div>
             </div>
-            <div className="book__page-back">
-              <div className="page__content">page 3</div>
-            </div>
           </div>
-        </div>
-      </div>
+        </Space>
     </Layout>
   );
 };
