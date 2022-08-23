@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
 
   const login = useCallback((access_token, refresh_token) => {
     localStorage.setItem('access-token', access_token);
-    localStorage.setItem('refresh-token', refresh_token);
+    // localStorage.setItem('refresh-token', refresh_token);
     updateInfo();
   }, []);
 
@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(false);
     setIsAdmin(false);
     localStorage.removeItem('access-token');
-    localStorage.removeItem('refresh-token');
+    // localStorage.removeItem('refresh-token');
   }, []);
 
   return (

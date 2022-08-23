@@ -49,7 +49,7 @@ export default function LoginForm(props) {
         <Input type="text" placeholder="Username" {...register('username')} />
         <Input type="password" placeholder="Password" {...register('password')} />
         <BlackLink to="/forget-password">Forgot your password?</BlackLink>
-        <Button type="submit">Log In</Button>
+        <Button type="submit" disabled={login.isLoading}>Log In</Button>
         <div style={{ marginTop: 10 }}>
           Not a member?{' '}
           <StyledLink className="link" to="/register">
