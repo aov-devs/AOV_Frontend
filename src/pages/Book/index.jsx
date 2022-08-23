@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Space } from 'react-zoomable-ui';
 import { LoginForm, RegisterForm } from 'src/components/Forms';
-import Layout from 'src/components/Layout';
+import Page from 'src/components/Page';
 import BeastImg from 'src/assets/beast.jpg';
 import './style.scss';
-import { useLocation } from 'react-router-dom';
-const LoginRegisterPage = () => {
+const BookPage = () => {
   const location = useLocation();
   const [bookPage, setBookPage] = useState('');
   useEffect(() => {
@@ -13,7 +13,7 @@ const LoginRegisterPage = () => {
     else if (location.pathname == '/login') setBookPage('');
   }, [location]);
   return (
-    <Layout title={location.pathname.substr(1)}>
+    <Page title={location.pathname.substr(1)}>
         <Space
           onCreate={(viewPort) => {
             viewPort.setBounds({
@@ -47,11 +47,11 @@ const LoginRegisterPage = () => {
             </div>
           </div>
         </Space>
-    </Layout>
+    </Page>
   );
 };
 
-export default LoginRegisterPage;
+export default BookPage;
 
 const DidYouKnowBox = () => {
   return (

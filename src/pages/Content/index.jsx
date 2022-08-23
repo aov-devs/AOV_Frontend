@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import { Divider, Avatar } from '@mui/material';
 import { FaTwitter } from 'react-icons/fa';
 import Annotation from 'react-image-annotation'
-import Layout from 'src/components/Layout';
+import Page from 'src/components/Page';
 import { mockAnnotations } from './mockData'
 import VaniImg from 'src/assets/demo/vaniiveRepo5.jpg'
 import { InkPenIcon, HourglassIcon } from 'src/components/VanitasIcons';
@@ -63,8 +63,7 @@ const ContentPage = () => {
   };
 
   return (
-    <div>
-      <Layout title="Content Demo">
+      <Page title="Content Demo">
         <div className="content-page">
           <div className="content-card">
             <div className="media-container">
@@ -179,8 +178,7 @@ const ContentPage = () => {
             </div>
           </div>
         </div>
-      </Layout>
-    </div>)
+      </Page>)
 };
 
 export default ContentPage;
