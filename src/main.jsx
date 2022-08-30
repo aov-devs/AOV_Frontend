@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider } from '@emotion/react';
+import ThemeProvider from './theme';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 import AppRouter from './routes/AppRouter';
-import theme from './theme/theme';
 import { AuthProvider } from './context/AuthContext';
 import './theme/main.scss';
 
@@ -16,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider>
           <BrowserRouter>
             <AppRouter />
           </BrowserRouter>
