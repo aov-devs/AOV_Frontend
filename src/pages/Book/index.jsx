@@ -5,15 +5,46 @@ import { LoginForm, RegisterForm } from 'src/components/Forms';
 import Page from 'src/components/Page';
 import BeastImg from 'src/assets/beast.jpg';
 import './style.scss';
+import useResponsive from 'src/hooks/useResponsive';
+
 const BookPage = () => {
   const location = useLocation();
   const [bookPage, setBookPage] = useState('');
+  const isMobile = useResponsive('down', 'sm');
   useEffect(() => {
     if (location.pathname == '/register') setBookPage('next-page');
     else if (location.pathname == '/login') setBookPage('');
   }, [location]);
+
+  const renderContent = (
+    <div className="book-container">
+      <div className="book">
+        <label htmlFor="page-1" className="book__page">
+          <DidYouKnowBox />
+        </label>
+
+        <label htmlFor="page-2" className="book__page book__page--4">
+          <div className="page__content">
+            <RegisterForm />
+          </div>
+        </label>
+
+        <div className={`book__page book__page--2 ${bookPage}`}>
+          <div className="book__page-front">
+            <div className="page__content">
+              <LoginForm />
+            </div>
+          </div>
+          <div className="book__page-back">
+            <div className="page__content">page 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
   return (
     <Page title={location.pathname.substr(1)}>
+      {isMobile ? (
         <Space
           onCreate={(viewPort) => {
             viewPort.setBounds({
@@ -22,31 +53,11 @@ const BookPage = () => {
             });
           }}
         >
-          <div className="book-container">
-            <div className="book">
-              <label htmlFor="page-1" className="book__page">
-                <DidYouKnowBox />
-              </label>
-
-              <label htmlFor="page-2" className="book__page book__page--4">
-                <div className="page__content">
-                  <RegisterForm />
-                </div>
-              </label>
-
-              <div className={`book__page book__page--2 ${bookPage}`}>
-                <div className="book__page-front">
-                  <div className="page__content">
-                    <LoginForm />
-                  </div>
-                </div>
-                <div className="book__page-back">
-                  <div className="page__content">page 3</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {renderContent}
         </Space>
+      ) : (
+        <>{renderContent}</>
+      )}
     </Page>
   );
 };
