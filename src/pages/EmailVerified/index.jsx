@@ -1,17 +1,17 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import Layout from 'src/components/Layout';
+import Page from 'src/components/Page';
 import { baseUrl } from '../../utils/constants';
 
-const Page = () => {
+const EmailVerifiedPage = () => {
   useEffect(() => {
     axios.get(baseUrl + window.location.pathname.replaceAll(':','.'));
   }, []);
   return (
     <div>
-      <Layout title="verified">your Email verified</Layout>
+      <Page title="verified">your Email verified</Page>
     </div>
   );
 };
 
-export default Page;
+export default EmailVerifiedPage;

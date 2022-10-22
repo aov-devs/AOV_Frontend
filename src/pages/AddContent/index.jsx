@@ -5,7 +5,7 @@ import NumericInput from 'react-numeric-input2';
 import TextField from '@mui/material/TextField';
 import { Tooltip, Pagination, Select, MenuItem, useMediaQuery } from '@mui/material';
 import VaniImg from 'src/assets/demo/loveismission1.jpg'
-import Layout from 'src/components/Layout';
+import Page from 'src/components/Page';
 import { mockAnnotations } from './mockData'
 
 import './style.scss';
@@ -278,7 +278,7 @@ const AddContentPage = ({ clear = false }) => {
   };
   return (
     <div>
-      <Layout title="Add New Content">
+      <Page title="Add New Content">
         <div className="content-page">
           <div className="add-content">
             <div className="media-container">
@@ -333,7 +333,7 @@ const AddContentPage = ({ clear = false }) => {
             </div>
           </div>
         </div>
-      </Layout >
+      </Page >
     </div >)
 };
 
